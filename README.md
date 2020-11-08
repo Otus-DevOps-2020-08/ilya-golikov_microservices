@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Otus-DevOps-2020-08/ilya-golikov_microservices.svg?branch=master)](https://travis-ci.com/Otus-DevOps-2020-08/ilya-golikov_microservices)
+
 # ilya-golikov_microservices
 ilya-golikov microservices repository
 
