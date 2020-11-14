@@ -1,0 +1,22 @@
+
+---
+- name: Install reddit
+  hosts: all
+  become: true
+  tasks:
+  - name: Install python-pip
+    apt:
+      name: python3-pip
+
+  - name: Install python module "Docker"
+    pip:
+      name: docker
+
+  - name: Start container
+    docker_container:
+      name: reddit
+      image: userkiller/otus-reddit:1.0
+      ports:
+        - "80:9292"
+      state: started
+      restart: yes

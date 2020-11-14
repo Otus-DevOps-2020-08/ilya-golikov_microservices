@@ -1,0 +1,21 @@
+{
+    "builders": [{
+        "type": "yandex",
+        "service_account_key_file": "{{ user `svc_key` }}",
+        "folder_id": "{{ user `folder` }}",
+        "source_image_family": "{{ user `source_image` }}",
+        "image_name": "docker-host-{{timestamp}}",
+        "image_family": "docker-host",
+        "ssh_username": "ubuntu",
+        "platform_id": "standard-v1",
+        "use_ipv4_nat": true,
+        "zone": "ru-central1-a",
+        "disk_name": "docker-host-hd",
+        "disk_size_gb": 10,
+        "image_description": "docker-host image"
+    }],
+    "provisioners": [{
+        "type": "ansible",
+        "playbook_file": "./ansible/playbooks/docker.yml"
+    }]
+}

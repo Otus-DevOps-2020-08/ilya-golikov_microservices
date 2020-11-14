@@ -1,0 +1,5 @@
+{
+    "svc_key": "../key.json",
+    "folder": "12345678900987654321",
+    "source_image": "ubuntu-1604-lts"
+}
