@@ -1,14 +1,13 @@
-FROM ubuntu:16.04
+FROM ruby:alpine
 
 WORKDIR /app
 ADD . /app
 
-RUN apt-get update \
-    && apt-get install -y ruby ruby-dev build-essential \
-    && gem install bundler --no-ri --no-rdoc \
-    && bundle install && apt-get -y purge build-essential ruby-dev \
-    && apt-get -y autoremove --purge \
-    && rm -rf /var/lib/apt
+RUN apk --no-cache --update add ruby-full ruby-dev build-base \
+    && gem install bundler \
+    && bundle update --bundler \
+    && bundle install \
+    && apk del build-base ruby-dev
 
 ENV POST_SERVICE_HOST post
 ENV POST_SERVICE_PORT 5000

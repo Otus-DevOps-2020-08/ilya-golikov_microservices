@@ -1,12 +1,13 @@
-FROM alpine:latest
+FROM ruby:alpine
 
 WORKDIR /app
 ADD . /app
 
-RUN ["busybox", "sh", "-c", "apk --no-cache --update add ruby-bundler ruby-dev build-base \
+RUN apk --no-cache --update add ruby-full ruby-dev build-base \
+    && gem install bundler \
     && bundle update --bundler \
     && bundle install \
-    && apk del build-base ruby-dev"]
+    && apk del build-base ruby-dev
 
 ENV COMMENT_DATABASE_HOST comment_db
 ENV COMMENT_DATABASE comments
