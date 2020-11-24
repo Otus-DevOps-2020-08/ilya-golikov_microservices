@@ -1,13 +1,13 @@
 ---
-#- name: Deploy infra
-#  hosts: localhost
-#  gather_facts: false
-#  tasks:
-#    - name: Deploy infra with terraform
-#      terraform:
-#        project_path: ../../terraform
-#        state: present
-#    - meta: refresh_inventory
+- name: Deploy infra
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Deploy infra with terraform
+      terraform:
+        project_path: ../../terraform
+        state: present
+    - meta: refresh_inventory
 
 - name: Deploy docker and gitlab
   hosts: gitlab_hosts
@@ -29,5 +29,5 @@
         name: docker
 
   roles:
-#    - geerlingguy.docker
+    - geerlingguy.docker
     - gitlab-ci
