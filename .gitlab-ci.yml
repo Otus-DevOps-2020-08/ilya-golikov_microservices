@@ -10,9 +10,9 @@ variables:
 
 build_job:
   stage: build
-  image: docker:19.03.12
+  image: docker:19.03.13
   services:
-    - docker:19.03.12
+    - docker:19.03.13-dind
   script:
     - echo 'Building'
     - docker build -t reddit-in-gitlab:1.0 -f reddit/Dockerfile .
