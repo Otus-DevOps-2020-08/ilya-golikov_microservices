@@ -3,6 +3,30 @@
 # ilya-golikov_microservices
 ilya-golikov microservices repository
 
+## Задание к лекции №22
+
+- создана ветка monitor-1;
+
+- Запущен и настроен docker-host в облаке Yandex Cloud;
+
+- Запущен контейнер с prometheus;
+
+- Создана конфигурация и докерфайл prometheus; Собран образ prometheus с необходимыми настройками;
+
+- Собраны образы reddit app;
+
+- В docker-compose.yml добавлен сервис prometheus;
+
+- Настроен мониторинг сервисов;
+
+- Добавлен node_exporter для сбора метрик с докер-хоста;
+
+- \* Добавлен [percona/mongodb_exporter](https://github.com/percona/mongodb_exporter) для сбора метрик с MongoDB; Dockerfile для сборки образа в monitoring/mongodb_exporter;
+
+- \* Добавлен и настроен blackbox_exporter для проверки работы сервисов ui, post и comment;
+
+- \* Создан Makefile, который собирает образы по отдельносьти и вместе, заливает их на docker hub, поднимает и уничтожает инфраструктуру описанную в docker/docker-compose.yml;
+
 ## Задание к лекции №19
 
 - создана веька gitlab-ci-1;
