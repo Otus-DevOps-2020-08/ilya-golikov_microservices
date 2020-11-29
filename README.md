@@ -27,6 +27,13 @@ ilya-golikov microservices repository
 
 - \* Создан Makefile, который собирает образы по отдельносьти и вместе, заливает их на docker hub, поднимает и уничтожает инфраструктуру описанную в docker/docker-compose.yml;
 
+- Все собранные образы залиты на docker-hub:
+  - [comment](https://hub.docker.com/repository/docker/userkiller/comment)
+  - [ui](https://hub.docker.com/repository/docker/userkiller/ui)
+  - [prometheus](https://hub.docker.com/repository/docker/userkiller/prometheus)
+  - [mongodb_exporter](https://hub.docker.com/repository/docker/userkiller/mongodb_exporter)
+  - [post](https://hub.docker.com/repository/docker/userkiller/post)
+
 ## Задание к лекции №19
 
 - создана веька gitlab-ci-1;
