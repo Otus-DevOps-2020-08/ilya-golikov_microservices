@@ -5,6 +5,8 @@ services:
     image: mongo:${MONGO_VER}
     volumes:
       - post_db:/data/db
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
     networks:
       back_net:
         aliases:
@@ -17,12 +19,27 @@ services:
       - ${UI_PORT}:9292/tcp
     networks:
       - front_net
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.ui
+
 
   post:
     image: ${USER_NAME}/post:${POST_VER}
     networks:
       - back_net
       - front_net
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.post
 
 
   comment:
@@ -30,6 +47,9 @@ services:
     networks:
       - back_net
       - front_net
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+
 
   prometheus:
     image: ${USER_NAME}/prometheus

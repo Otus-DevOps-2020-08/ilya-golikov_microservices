@@ -9,7 +9,7 @@ build_sh := bash docker_build.sh
 docker_build := docker build -t $(USER_NAME)
 
 
-.PHONY: help build_ui build_comment build_post
+.PHONY: help
 
 help: ## This help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -18,7 +18,7 @@ help: ## This help.
 
 ------------------------------: ## ---------------------------------
 
-all: push_ui push_comment push_post push_prometheus push_mongodb_exporter## Build all docker images and push them in docker hub
+all: push_ui push_comment push_post push_prometheus push_mongodb_exporter push_fluentd ## Build all docker images and push them in docker hub
 
 build_ui: ## Build "ui" docker image
 	@echo '>> Build "ui" docker image'
@@ -40,6 +40,10 @@ build_mongodb_exporter: ## Build "Mongodb exporter" docker image
 	@echo '>> Build "Mongodb exporter" docker image'
 	@cd monitoring/mongodb_exporter && $(docker_build)/mongodb_exporter .
 
+build_fluentd: ## Build Fluentd docker image
+	@echo '>> Build "Fluentd" docker image'
+	@cd logging/fluentd && $(docker_build)/fluentd .
+
 push_ui: build_ui ## Push ui image in docker hub
 	@echo '>> Push "ui" image in docker hub'
 	@docker push $(USER_NAME)/ui
@@ -60,11 +64,15 @@ push_mongodb_exporter: build_mongodb_exporter ## Push mongodb_exporter image in 
 	@echo '>> Push "mongodb_exporter" image in docker hub'
 	@docker push $(USER_NAME)/mongodb_exporter
 
+push_fluentd: build_fluentd ## Push fluentd image in docker hub
+	@echo '>> Push "fluentd" image in docker hub'
+	@docker push $(USER_NAME)/fluentd
+
 ------------------------------: ## ---------------------------------
 
 up: ## Create and up containers described in docker/docker-compose.yml
 	@echo '>> Creating and start containers...'
-	@cd docker && docker-compose up -d
+	@cd docker && docker-compose -f docker-compose.yml up -d
 
 down: ## Stop and remove containers and networks
 	@echo '>> Stop and remove containers and networks...'
@@ -76,11 +84,11 @@ destroy: ## Stop and remove containers, networks and named volumes declared in t
 
 stop: ## Stop services
 	@echo '>> Stopping containers...'
-	@cd docker && docker-compose -f docker-compose.yml stop
+	@cd docker && docker-compose  -f docker-compose.yml  stop
 
 restart: ## Restart services
 	@echo '>> Restarting containers...'
-	@cd docker && docker-compose -f docker-compose.yml restart
+	@cd docker && docker-compose  -f docker-compose.yml  restart
 
 kill: ## Kill all running containers
 	@echo '>> Killing all running containers'

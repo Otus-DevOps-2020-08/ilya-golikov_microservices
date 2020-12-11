@@ -3,6 +3,32 @@
 # ilya-golikov_microservices
 ilya-golikov microservices repository
 
+## Задание к лекции №25
+
+- создана ветка logging-1;
+
+- Запущен и настроен docker-host в облаке Yandex Cloud;
+
+- Создан docker-compose-logging.yml;
+
+- Собран docker образ fluentd;
+
+- Настроена Kibana;
+
+- Настроен сбор структурированных логов c помощью фильтров во fluentd;
+
+- Настроен сбор неструктурируемых логов; добавлены grok-шаблоны;
+
+- Задание со⭐: Добавлен grok шаблон для оставшегося неразобранного формата логов:
+
+  Grok-шаблон:
+  ```
+  service=%{WORD:service} \| event=%{WORD:event} \| path=%{UNIXPATH:path} \| request_id=%{GREEDYDATA:request_id} \| remote_addr=%{IPV4:remote_address} \| method=%{DATA:method} \| response_status=%{BASE10NUM:response_status}
+  ```
+- Установлена система распределенного трейсинга zipkin;
+
+- Задание со⭐: С помощью системы распределенного трейсинга была выявлена 3 секундная задержка в запросе `GET` к адресу `/post/<id>`. Виновником задержки был вызов `time.sleep(3)` в функции `find_post(id)`.
+
 ## Задание к лекции №22
 
 - создана ветка monitor-1;
