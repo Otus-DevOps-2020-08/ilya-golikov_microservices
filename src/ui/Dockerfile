@@ -1,14 +1,15 @@
-FROM ruby:alpine
+FROM ruby:2.3.3
 
-WORKDIR /app
-ADD . /app
+RUN apt-get update -qq && apt-get install -y build-essential
 
-RUN apk --no-cache --update add ruby-full ruby-dev build-base && \
-    gem install bundler && \
-    bundle update --bundler && \
-    bundle install && \
-    apk del build-base ruby-dev
+ENV APP_HOME /app
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
 
+ADD Gemfile* $APP_HOME/
+RUN bundle install
+
+ADD . $APP_HOME
 ENV POST_SERVICE_HOST post
 ENV POST_SERVICE_PORT 5000
 ENV COMMENT_SERVICE_HOST comment
