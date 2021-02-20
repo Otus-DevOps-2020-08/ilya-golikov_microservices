@@ -3,6 +3,14 @@
 # ilya-golikov_microservices
 ilya-golikov microservices repository
 
+## Задание к лекции №27
+
+- создана ветка kubernetes-1;
+
+- созданы файлы с Deployment манифестами приложений;
+
+- пройден курс Kubernetes: The Hard way;
+
 ## Задание к лекции №25
 
 - создана ветка logging-1;
