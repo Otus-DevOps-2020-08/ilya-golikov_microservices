@@ -3,6 +3,18 @@
 # ilya-golikov_microservices
 ilya-golikov microservices repository
 
+## Задание к лекции №28
+
+- создана ветка kubernetes-2;
+
+- создан minikube кластер;
+
+- развернуто приложение reddit в локальном кластене minikube;
+
+- развернут кластер в GCE;
+
+- развернуто приложение reddit в kubernetes кластере в GCE;
+
 ## Задание к лекции №27
 
 - создана ветка kubernetes-1;
